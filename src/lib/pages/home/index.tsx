@@ -28,7 +28,6 @@ import { FeeOption } from "@pioneer-platform/types";
 import { COIN_MAP_LONG } from "@pioneer-platform/pioneer-coins";
 
 const Home = () => {
-
   // steps
   const [step, setStep] = useState(0);
   const [modalType, setModalType] = useState(null);
@@ -65,7 +64,6 @@ const Home = () => {
 
   const onStart = async function () {
     try {
-
     } catch (e) {
       console.error(e);
     }
@@ -180,19 +178,8 @@ const Home = () => {
             onClick={() => openModal("settings")}
           />
         </Flex>
+        {renderStepContent()}
       </Box>
-      <VStack>
-        <Flex
-          w="35rem"
-          mx="auto"
-          alignItems="center"
-          justifyContent="space-between"
-          bg="black"
-          p="2rem"
-        >
-          {renderStepContent()}
-        </Flex>
-      </VStack>
       <Flex
         w="35rem"
         mx="auto"
