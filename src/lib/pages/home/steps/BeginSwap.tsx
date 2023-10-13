@@ -3,11 +3,27 @@ import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 // @ts-ignore
 import calculatingAnimation from "lib/assets/gif/calculating.gif";
-;
+// @ts-ignore
+import {
+  usePioneer,
+  AssetSelect,
+  BlockchainSelect,
+  WalletSelect,
+  // @ts-ignore
+} from "@pioneer-sdk/pioneer-react";
 
 // @ts-ignore
-const BeginSwap = ({ input, output, setRoute }) => {
-
+const BeginSwap = ({ setRoute }) => {
+  const { state } = usePioneer();
+  const {
+    api,
+    app,
+    context,
+    assetContext,
+    outboundAssetContext,
+    blockchainContext,
+    pubkeyContext,
+  } = state;
   const [showGif, setShowGif] = useState(true);
   const [routes, setRoutes] = useState({});
   const [amountOut, setAmountOut] = useState("");
@@ -15,7 +31,6 @@ const BeginSwap = ({ input, output, setRoute }) => {
   //build swap
   const buildSwap = async function () {
     try {
-
       //onDone
       setShowGif(false);
     } catch (e) {
@@ -44,7 +59,7 @@ const BeginSwap = ({ input, output, setRoute }) => {
             You will receive {amountOut}
           </Box>
           <Box border="1px" borderRadius="md" p={4} boxShadow="lg">
-            {output.address} ({output.symbol})
+            {outboundAssetContext.address} ({outboundAssetContext.symbol})
           </Box>
         </Box>
       )}

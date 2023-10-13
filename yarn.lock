@@ -3397,10 +3397,10 @@
   dependencies:
     "@pioneer-platform/types" "3.0.1"
 
-"@pioneer-sdk/pioneer-react@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@pioneer-sdk/pioneer-react/-/pioneer-react-0.0.2.tgz#6fbeda8b7cc6b5fe729b75f9ac78cf788e162c64"
-  integrity sha512-b917VuclaWSn0Q1irfcvpgSA+c3pDZMRCO11+bWTR/RfWbHh4bsCeLg998cvyz8MxWlLcuRY1EUVhXREnTFnqA==
+"@pioneer-sdk/pioneer-react@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@pioneer-sdk/pioneer-react/-/pioneer-react-0.0.4.tgz#061d8855f0deec693d4d35013cd11289022345f9"
+  integrity sha512-HZra0Ug3YmSTkL/WONOaUskomsBhT2x3brEqSwQAhQb5FgzL0cg8Ag7ItWgsmSK7A9isjw6ermCEGk/bkH5iow==
   dependencies:
     "@chakra-ui/icons" "^2.0.19"
     "@chakra-ui/react" "^2.6.0"
@@ -3409,7 +3409,7 @@
     "@esbuild-plugins/node-globals-polyfill" "^0.2.3"
     "@esbuild-plugins/node-modules-polyfill" "^0.2.2"
     "@fontsource/plus-jakarta-sans" "^4.5.11"
-    "@pioneer-sdk/sdk-v2" "^0.0.6"
+    "@pioneer-sdk/sdk-v2" "^0.0.8"
     "@types/uuid" "^9.0.1"
     assert "^2.0.0"
     bip39 "^3.1.0"
@@ -3429,10 +3429,10 @@
     swagger-client "^3.19.8"
     uuid "^9.0.0"
 
-"@pioneer-sdk/sdk-v2@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@pioneer-sdk/sdk-v2/-/sdk-v2-0.0.6.tgz#b8e770b766157a842b0bcfc5525410cc23adb3c7"
-  integrity sha512-v21Rc74vvZ+2GgMz/3IGhOAVgq3OJCRLY3nCVbP6AT+XfNc0kkaNpSFh4NKakhXMv9OCWDo8b4rxzTTTZxyHKQ==
+"@pioneer-sdk/sdk-v2@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@pioneer-sdk/sdk-v2/-/sdk-v2-0.0.8.tgz#5ae3255f4253832330d8eab18f7bb176e4cf98c5"
+  integrity sha512-jSKnva5SeRd7YzSlM9iWiBMDForhI+3afJUUuigZD+8tUoIK8qox/KGVfVSU2JyIUQoXnmn9TmmnF19Jtt1dWw==
   dependencies:
     "@keepkey/keepkey-sdk" "^0.2.52"
     "@keplr-wallet/types" "^0.12.31"

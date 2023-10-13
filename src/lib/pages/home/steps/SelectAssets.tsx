@@ -21,25 +21,35 @@ import {
 import { SettingsIcon, ArrowUpDownIcon, AddIcon } from "@chakra-ui/icons";
 // @ts-ignore
 import { useSwap } from "swapkit-provider";
-import BlockchainSelect from "lib/components/AssetSelect";
-import OutputSelect from "lib/components/OutputSelect";
 interface BeginSwapProps {
-  input: any; // Replace 'any' with the actual type of 'input'
-  setInput: any; // Replace 'any' with the actual type of 'setInput'
-  output: any; // Replace 'any' with the actual type of 'output'
-  setOutput: any; // Replace 'any' with the actual type of 'setOutput'
+  openModal: any; // Replace 'any' with the actual type of 'openModal'
   handleClick: any; // Replace 'any' with the actual type of 'handleClick'
   selectedButton: any; // Replace 'any' with the actual type of 'selectedButton'
 }
 
+import {
+  usePioneer,
+  AssetSelect,
+  BlockchainSelect,
+  WalletSelect,
+  // @ts-ignore
+} from "@pioneer-sdk/pioneer-react";
+
 const BeginSwap: React.FC<BeginSwapProps> = ({
-  input,
-  setInput,
-  output,
-  setOutput,
+  openModal,
   handleClick,
   selectedButton,
 }) => {
+  const { state } = usePioneer();
+  const {
+    api,
+    app,
+    context,
+    assetContext,
+    outboundAssetContext,
+    blockchainContext,
+    pubkeyContext,
+  } = state;
   const [modalType, setModalType] = useState("");
   const [chains, setChains] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,55 +65,12 @@ const BeginSwap: React.FC<BeginSwapProps> = ({
     onStart();
   }, []);
 
-  const openModal = (type: any) => {
-    setModalType(type);
-    onOpen();
-  };
-
   const switchAssets = function () {
     console.log("Switching assets!");
-    const inputNew = output;
-    const outputNew = input;
-    setInput(inputNew);
-    setOutput(outputNew);
   };
 
   return (
     <div>
-      <Modal isOpen={isOpen} onClose={() => onClose()} size="xl">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{modalType}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {/* Render content based on modalType */}
-            {modalType === "Select Input" && (
-              <div>
-                {chains.toString()}
-                <br />
-                <BlockchainSelect
-                  setInput={setInput}
-                  onClose={onClose}
-                ></BlockchainSelect>
-                {/*{JSON.stringify(walletData)}*/}
-              </div>
-            )}
-            {modalType === "Select Output" && (
-              <div>
-                <OutputSelect
-                  setOutput={setOutput}
-                  onClose={onClose}
-                ></OutputSelect>
-              </div>
-            )}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
       <Flex
         mx="auto"
         alignItems="center"
@@ -126,18 +93,21 @@ const BeginSwap: React.FC<BeginSwapProps> = ({
             alignItems="center"
             justifyContent="center"
             _hover={{ color: "rgb(128,128,128)" }}
-            onClick={() => openModal("Select Input")}
+            onClick={() => openModal("Select Asset")}
           >
-            {!input ? (
+            {!assetContext ? (
               <Spinner size="lg" color="blue.500" />
             ) : (
               <>
-                <Avatar size="xl" src={input.image} />
+                {/*<Avatar size="xl" src={input.image} />*/}
                 <Box border="1px solid #fff" borderRadius="8px" width="100%">
-                  <Text>Network: {input.network}</Text>
+                  <Text>name: {assetContext?.asset?.name}</Text>
                 </Box>
                 <Box border="1px solid #fff" borderRadius="8px" width="100%">
-                  <Text>Asset: {input.symbol}</Text>
+                  <Text>Network: {assetContext?.asset?.network}</Text>
+                </Box>
+                <Box border="1px solid #fff" borderRadius="8px" width="100%">
+                  <Text>Asset: {assetContext?.asset?.symbol}</Text>
                 </Box>
               </>
             )}
@@ -157,18 +127,21 @@ const BeginSwap: React.FC<BeginSwapProps> = ({
             alignItems="center"
             justifyContent="center"
             _hover={{ color: "rgb(128,128,128)" }}
-            onClick={() => openModal("Select Output")}
+            onClick={() => openModal("Select Outbound")}
           >
-            {!output ? (
+            {!outboundAssetContext ? (
               <Spinner size="lg" color="blue.500" />
             ) : (
               <div>
-                <Avatar size="xl" src={output.image} />
+                {/*<Avatar size="xl" src={outboundAssetContext.image} />*/}
                 <Box border="1px solid #fff" borderRadius="8px" width="100%">
-                  <Text>Network: {output.network}</Text>
+                  <Text>name: {outboundAssetContext?.asset?.name}</Text>
                 </Box>
                 <Box border="1px solid #fff" borderRadius="8px" width="100%">
-                  <Text>Asset: {output.symbol}</Text>
+                  <Text>Network: {outboundAssetContext?.asset?.network}</Text>
+                </Box>
+                <Box border="1px solid #fff" borderRadius="8px" width="100%">
+                  <Text>Asset: {outboundAssetContext?.asset?.symbol}</Text>
                 </Box>
               </div>
             )}

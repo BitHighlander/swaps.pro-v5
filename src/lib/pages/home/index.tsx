@@ -27,7 +27,24 @@ import { FeeOption } from "@pioneer-platform/types";
 // @ts-ignore
 import { COIN_MAP_LONG } from "@pioneer-platform/pioneer-coins";
 
+import {
+  AssetSelect,
+  OutputSelect,
+  usePioneer,
+  // @ts-ignore
+} from "@pioneer-sdk/pioneer-react";
+
 const Home = () => {
+  const { state } = usePioneer();
+  const {
+    api,
+    app,
+    context,
+    assetContext,
+    blockchainContext,
+    pubkeyContext,
+    modals,
+  } = state;
   // steps
   const [step, setStep] = useState(0);
   const [modalType, setModalType] = useState(null);
@@ -42,8 +59,6 @@ const Home = () => {
   const [continueButtonContent, setContinueButtonContent] =
     useState("Continue"); // Initial continue button content is "Continue"
   const [assets, setAssets] = useState([]); // Array to store assets
-  const [input, setInput] = useState(null);
-  const [output, setOutput] = useState(null);
   const [showGoBack, setShowGoBack] = useState(false);
 
   useEffect(() => {
@@ -51,7 +66,7 @@ const Home = () => {
     // if (swapKit && output && input && input?.address && output?.address && step === 0) {
     //   setIsContinueDisabled(false);
     // }
-  }, [input, output]);
+  }, [assetContext, blockchainContext]);
 
   useEffect(() => {
     if (step === 0) {
@@ -119,16 +134,13 @@ const Home = () => {
       case 0:
         return (
           <SelectAssets
-            input={input}
-            setInput={setInput}
-            output={output}
-            setOutput={setOutput}
+            openModal={openModal}
             handleClick={handleClick}
             selectedButton={selectedButton}
           />
         );
       case 1:
-        return <BeginSwap input={input} output={output} setRoute={setRoute} />;
+        return <BeginSwap setRoute={setRoute} />;
       case 2:
         return <CompleteSwap txHash={txHash} />;
       default:
@@ -147,7 +159,16 @@ const Home = () => {
           <ModalCloseButton />
           <ModalBody>
             {/* Render content based on modalType */}
-            {modalType === "settings" && <div>settings</div>}
+            {modalType === "Select Asset" && (
+              <div>
+                <AssetSelect onClose={onClose}></AssetSelect>
+              </div>
+            )}
+            {modalType === "Select Outbound" && (
+              <div>
+                <OutputSelect onClose={onClose}></OutputSelect>
+              </div>
+            )}
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" onClick={onClose}>
