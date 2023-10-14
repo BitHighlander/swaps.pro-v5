@@ -41,6 +41,7 @@ const Home = () => {
     app,
     context,
     assetContext,
+    outboundAssetContext,
     blockchainContext,
     pubkeyContext,
     modals,
@@ -62,10 +63,15 @@ const Home = () => {
   const [showGoBack, setShowGoBack] = useState(false);
 
   useEffect(() => {
-    // @ts-ignore
-    // if (swapKit && output && input && input?.address && output?.address && step === 0) {
-    //   setIsContinueDisabled(false);
-    // }
+    if (
+      app &&
+      app.swapKit &&
+      assetContext &&
+      outboundAssetContext &&
+      step === 0
+    ) {
+      setIsContinueDisabled(false);
+    }
   }, [assetContext, blockchainContext]);
 
   useEffect(() => {
@@ -164,11 +170,11 @@ const Home = () => {
                 <AssetSelect onClose={onClose}></AssetSelect>
               </div>
             )}
-            {modalType === "Select Outbound" && (
-              <div>
-                <OutputSelect onClose={onClose}></OutputSelect>
-              </div>
-            )}
+            {/*{modalType === "Select Outbound" && (*/}
+            {/*  <div>*/}
+            {/*    <OutputSelect onClose={onClose} onlyOwned={false}></OutputSelect>*/}
+            {/*  </div>*/}
+            {/*)}*/}
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" onClick={onClose}>
