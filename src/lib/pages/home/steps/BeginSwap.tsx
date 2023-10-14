@@ -131,8 +131,7 @@ const BeginSwap = ({ setRoute }) => {
     if (routes && routes.length > 0) {
       setShowGif(false);
     }
-    setShowGif(false);
-  }, []);
+  }, [routes]);
 
   //build swap
   const buildSwap = async function () {
